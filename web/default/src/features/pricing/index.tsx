@@ -253,6 +253,7 @@ export function Pricing() {
                 hasActiveFilters={hasActiveFilters}
                 activeFilterCount={activeFilterCount}
                 onClearFilters={clearFilters}
+                usdExchangeRate={usdExchangeRate ?? 1}
               />
 
               {renderPricingContent()}

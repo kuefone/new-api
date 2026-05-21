@@ -47,6 +47,7 @@ import {
   type ViewMode,
 } from '../constants'
 import type { PricingModel, PricingVendor, TokenUnit } from '../types'
+import { DiscountExplainer } from './discount-explainer'
 import { PricingSidebar } from './pricing-sidebar'
 
 type SegmentOption = {
@@ -85,6 +86,7 @@ export interface PricingToolbarProps {
   hasActiveFilters: boolean
   activeFilterCount: number
   onClearFilters: () => void
+  usdExchangeRate?: number
 }
 
 function SegmentedControl(props: {
@@ -193,6 +195,11 @@ export function PricingToolbar(props: PricingToolbarProps) {
 
         <div className='flex flex-wrap items-center gap-2'>
           <div className='hidden items-center gap-2 sm:flex'>
+            <DiscountExplainer
+              compact
+              usdExchangeRate={props.usdExchangeRate ?? 1}
+              groupRatio={props.groupRatios || {}}
+            />
             <SegmentedControl
               options={[
                 { value: 'standard', label: t('Standard') },
