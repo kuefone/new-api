@@ -36,16 +36,22 @@ export function CTA(props: CTAProps) {
 
   return (
     <section className='relative z-10 overflow-hidden px-6 py-24 md:py-32'>
-      {/* Gradient mesh background */}
+      {/* Gradient mesh background — neon stall lights */}
       <div
         aria-hidden
-        className='absolute inset-0 -z-10 opacity-20 dark:opacity-[0.08]'
+        className='absolute inset-0 -z-10 opacity-25 dark:opacity-[0.12]'
         style={{
           background: [
-            'radial-gradient(ellipse 50% 50% at 30% 50%, oklch(0.7 0.15 250 / 70%) 0%, transparent 70%)',
-            'radial-gradient(ellipse 40% 40% at 70% 40%, oklch(0.65 0.12 200 / 50%) 0%, transparent 70%)',
+            'radial-gradient(ellipse 50% 50% at 30% 50%, oklch(0.78 0.18 60 / 70%) 0%, transparent 70%)',
+            'radial-gradient(ellipse 40% 40% at 70% 40%, oklch(0.70 0.20 320 / 60%) 0%, transparent 70%)',
+            'radial-gradient(ellipse 35% 35% at 50% 90%, oklch(0.70 0.16 250 / 50%) 0%, transparent 70%)',
           ].join(', '),
         }}
+      />
+      {/* Animated sweep */}
+      <div
+        aria-hidden
+        className='ssa-cta-sweep pointer-events-none absolute inset-0 -z-10 opacity-50 dark:opacity-30'
       />
 
       <AnimateInView
@@ -53,28 +59,33 @@ export function CTA(props: CTAProps) {
         animation='scale-in'
       >
         <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-4xl'>
-          {t('Ready to simplify')}
+          {t('The stall is open.')}
           <br />
-          <span className='bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500 bg-clip-text text-transparent'>
-            {t('your AI integration?')}
+          <span className='bg-gradient-to-r from-amber-400 via-rose-400 to-fuchsia-500 bg-clip-text text-transparent'>
+            {t('Step right up.')}
           </span>
         </h2>
-        <p className='text-muted-foreground/80 mx-auto mt-5 max-w-md text-sm leading-relaxed md:text-base'>
+        <p className='text-muted-foreground/85 mx-auto mt-5 max-w-md text-sm leading-relaxed md:text-base'>
           {t(
-            'Deploy your own gateway and start routing requests through your configured upstream services.'
+            'No subscription, no minimum spend. Top up what you need, route everything through one endpoint, and only pay for what your agents actually use.'
           )}
         </p>
         <div className='mt-8 flex items-center justify-center gap-3'>
-          <Button className='group rounded-lg' render={<Link to='/sign-up' />}>
-            {t('Get Started')}
-            <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
+          <Button
+            className='ssa-cta-shine group relative overflow-hidden rounded-lg'
+            render={<Link to='/sign-up' />}
+          >
+            <span className='relative z-10 inline-flex items-center'>
+              {t('Grab a stall key')}
+              <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
+            </span>
           </Button>
           <Button
             variant='outline'
             className='border-border/50 hover:border-border hover:bg-muted/50 rounded-lg'
             render={<Link to='/pricing' />}
           >
-            {t('View Pricing')}
+            {t('Check the menu')}
           </Button>
         </div>
       </AnimateInView>

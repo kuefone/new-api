@@ -16,7 +16,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { Settings, Zap, BarChart3 } from 'lucide-react'
+import { KeyRound, Plug, Sparkles } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AnimateInView } from '@/components/animate-in-view'
 
@@ -26,25 +26,27 @@ export function HowItWorks() {
   const steps = [
     {
       num: '1',
-      title: t('Configure'),
+      title: t('Order a key'),
       desc: t(
-        'Add your API keys, set up channels and configure access permissions'
+        'Sign up, top up a few coins, and grab your stall key — no contract, no minimum.'
       ),
-      icon: <Settings className='size-6' strokeWidth={1.5} />,
+      icon: <KeyRound className='size-6' strokeWidth={1.5} />,
     },
     {
       num: '2',
-      title: t('Connect'),
+      title: t('Swap the base URL'),
       desc: t(
-        'Connect through OpenAI, Claude, Gemini, and other compatible API routes'
+        'Point your OpenAI / Claude / Gemini client at our endpoint. Same SDK, same calls.'
       ),
-      icon: <Zap className='size-6' strokeWidth={1.5} />,
+      icon: <Plug className='size-6' strokeWidth={1.5} />,
     },
     {
       num: '3',
-      title: t('Monitor'),
-      desc: t('Track usage, costs and performance with real-time analytics'),
-      icon: <BarChart3 className='size-6' strokeWidth={1.5} />,
+      title: t('Ship the agent'),
+      desc: t(
+        'Stream tokens, hit cache, watch the live usage board — the kitchen runs 24/7.'
+      ),
+      icon: <Sparkles className='size-6' strokeWidth={1.5} />,
     },
   ]
 
@@ -53,14 +55,23 @@ export function HowItWorks() {
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-16 text-center md:mb-20'>
           <p className='text-muted-foreground mb-3 text-xs font-medium tracking-widest uppercase'>
-            {t('How It Works')}
+            {t('How it works')}
           </p>
           <h2 className='text-2xl font-bold tracking-tight md:text-3xl'>
-            {t('Three steps to get started')}
+            {t('Order, plug in, and you are live')}
           </h2>
         </AnimateInView>
 
-        <div className='grid gap-8 md:grid-cols-3 md:gap-12'>
+        <div className='ssa-steps relative grid gap-8 md:grid-cols-3 md:gap-12'>
+          {/* Decorative connector line between steps */}
+          <div
+            aria-hidden
+            className='absolute top-8 hidden h-px md:left-[16.6%] md:right-[16.6%] md:block'
+            style={{
+              background:
+                'linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent)',
+            }}
+          />
           {steps.map((step, i) => (
             <AnimateInView
               key={step.num}
@@ -69,10 +80,10 @@ export function HowItWorks() {
               className='relative flex flex-col items-center text-center'
             >
               <div className='relative mb-6'>
-                <div className='text-muted-foreground border-border/50 bg-muted/30 flex size-16 items-center justify-center rounded-2xl border transition-colors'>
+                <div className='text-muted-foreground border-border/50 bg-background group-hover:text-foreground flex size-16 items-center justify-center rounded-2xl border transition-colors'>
                   {step.icon}
                 </div>
-                <div className='bg-foreground text-background absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full text-xs font-bold'>
+                <div className='ssa-step-badge absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-fuchsia-500 text-xs font-bold text-white shadow-[0_0_18px_-2px_var(--tw-shadow-color)] shadow-fuchsia-500/40'>
                   {step.num}
                 </div>
               </div>

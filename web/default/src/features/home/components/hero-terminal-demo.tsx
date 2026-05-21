@@ -32,6 +32,7 @@ interface ApiDemoConfig {
   responseHighlights: string[]
   tokens: number
   latency: number
+  cacheHit: number
   accent: AccentTone
 }
 
@@ -91,6 +92,7 @@ const API_DEMOS: ApiDemoConfig[] = [
     responseHighlights: ['<text>', '<tokens>'],
     tokens: 27,
     latency: 142,
+    cacheHit: 82,
     accent: 'emerald',
   },
   {
@@ -109,6 +111,7 @@ const API_DEMOS: ApiDemoConfig[] = [
     responseHighlights: ['<text>', '<tokens>'],
     tokens: 31,
     latency: 168,
+    cacheHit: 71,
     accent: 'amber',
   },
   {
@@ -133,6 +136,7 @@ const API_DEMOS: ApiDemoConfig[] = [
     responseHighlights: ['<text>', '<in>', '<out>'],
     tokens: 29,
     latency: 156,
+    cacheHit: 92,
     accent: 'blue',
   },
   {
@@ -156,6 +160,7 @@ const API_DEMOS: ApiDemoConfig[] = [
     responseHighlights: ['<text>', '<tokens>'],
     tokens: 25,
     latency: 93,
+    cacheHit: 78,
     accent: 'violet',
   },
 ]
@@ -295,11 +300,18 @@ export function HeroTerminalDemo() {
               <span className='tracking-wider uppercase'>tokens</span>
             </span>
             <span className='bg-foreground/15 size-1 rounded-full' />
-            <span className='flex items-center gap-1'>
-              <span className='tracking-wider uppercase'>cost</span>
-              <span className='font-mono'>
-                ${(demo.tokens * 0.00003).toFixed(5)}
-              </span>
+            <span
+              className={cn(
+                'flex items-center gap-1 transition-colors',
+                demo.cacheHit > 0 &&
+                  'text-emerald-600 dark:text-emerald-400'
+              )}
+            >
+              <span className='tracking-wider uppercase'>cache</span>
+              <span className='font-mono'>{demo.cacheHit}%</span>
+              {demo.cacheHit > 0 && (
+                <span aria-hidden className='ssa-pulse-dot bg-emerald-500' />
+              )}
             </span>
           </div>
           <span className='text-foreground/30 font-mono text-[10px] tracking-wider uppercase'>

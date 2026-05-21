@@ -17,14 +17,14 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import {
-  Zap,
-  Shield,
-  Globe,
-  Code,
+  Database,
   Gauge,
-  DollarSign,
-  Users,
   HeartHandshake,
+  Layers,
+  Receipt,
+  ShieldCheck,
+  Wallet,
+  Wand2,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AnimateInView } from '@/components/animate-in-view'
@@ -33,123 +33,130 @@ interface FeaturesProps {
   className?: string
 }
 
+const PRICE_ROWS: Array<{ name: string; official: string; ssa: string }> = [
+  { name: 'GPT-class', official: '$15.00', ssa: '$1.50' },
+  { name: 'Claude-class', official: '$18.00', ssa: '$1.80' },
+  { name: 'Gemini-class', official: '$10.00', ssa: '$1.00' },
+]
+
 export function Features(_props: FeaturesProps) {
   const { t } = useTranslation()
 
   const features = [
     {
-      id: 'fast',
+      id: 'price',
       num: '01',
-      title: t('Lightning Fast'),
+      title: t('Street-stall pricing'),
       desc: t(
-        'Optimized network architecture ensures millisecond response times'
+        'Direct upstream channels and bulk-purchased quotas — flagship models priced at roughly one tenth of the official meter. Same call, one-tenth the bill.'
       ),
       span: 'md:col-span-2',
-      icon: <Zap className='size-4 text-blue-400' />,
+      icon: <Wallet className='size-4 text-amber-500' />,
       visual: (
-        <div className='mt-4 grid grid-cols-3 gap-2'>
-          {['OpenAI', 'Claude', 'Gemini', 'DeepSeek', 'Qwen', 'Llama'].map(
-            (name) => (
-              <div
-                key={name}
-                className='border-border/30 bg-muted/20 text-muted-foreground flex items-center justify-center rounded-lg border px-3 py-2 text-xs transition-colors duration-300 hover:border-blue-500/30 hover:bg-blue-500/5'
-              >
-                {name}
-              </div>
-            )
-          )}
+        <div className='mt-4 overflow-hidden rounded-lg border border-amber-500/20 bg-amber-500/[0.04]'>
+          <div className='grid grid-cols-3 border-b border-amber-500/15 bg-amber-500/[0.06] px-3 py-1.5 text-[10px] font-semibold tracking-wider text-amber-700 uppercase dark:text-amber-300'>
+            <span>{t('model')}</span>
+            <span className='text-right text-muted-foreground/70'>
+              {t('official')}
+            </span>
+            <span className='text-right'>SSA</span>
+          </div>
+          {PRICE_ROWS.map((row, i) => (
+            <div
+              key={row.name}
+              className='ssa-price-row grid grid-cols-3 px-3 py-1.5 text-xs tabular-nums'
+              style={{ animationDelay: `${i * 140}ms` }}
+            >
+              <span className='text-foreground/80'>{row.name}</span>
+              <span className='text-muted-foreground/70 line-through text-right'>
+                {row.official}
+              </span>
+              <span className='text-right font-semibold text-amber-600 dark:text-amber-400'>
+                {row.ssa}
+              </span>
+            </div>
+          ))}
         </div>
       ),
     },
     {
-      id: 'secure',
+      id: 'cache',
       num: '02',
-      title: t('Secure & Reliable'),
+      title: t('Prompt cache that pays you back'),
       desc: t(
-        'Enterprise-grade security with comprehensive permission management'
+        'Automatic cache read & write across providers. Repeated context lands on warm tokens — faster and dramatically cheaper.'
       ),
       span: 'md:col-span-1',
-      icon: <Shield className='size-4 text-emerald-400' />,
+      icon: <Database className='size-4 text-emerald-500' />,
       visual: (
         <div className='mt-4 flex items-center justify-center'>
-          <div className='relative'>
-            <div className='flex size-16 items-center justify-center rounded-2xl border border-emerald-500/20 bg-emerald-500/5'>
-              <Shield
-                className='size-7 text-emerald-500/70'
-                strokeWidth={1.5}
-              />
-            </div>
-            <div className='absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-emerald-500'>
-              <svg
-                className='size-2.5 text-white'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth={3}
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='m4.5 12.75 6 6 9-13.5'
-                />
-              </svg>
+          <div className='relative flex size-20 items-center justify-center'>
+            <div className='ssa-cache-ring absolute inset-0 rounded-full border-2 border-emerald-500/30' />
+            <div
+              className='ssa-cache-ring absolute inset-1 rounded-full border-2 border-emerald-400/40'
+              style={{ animationDelay: '-1.5s' }}
+            />
+            <div className='relative flex size-12 items-center justify-center rounded-full border border-emerald-500/40 bg-emerald-500/10 text-[11px] font-bold tabular-nums text-emerald-600 dark:text-emerald-400'>
+              85%
             </div>
           </div>
         </div>
       ),
     },
     {
-      id: 'global',
+      id: 'concurrent',
       num: '03',
-      title: t('Global Coverage'),
-      desc: t('Multi-region deployment for stable global access'),
+      title: t('Commercial-grade concurrency'),
+      desc: t(
+        'High-performance Go core, Redis-backed limiters and channel scheduling — survives traffic spikes that bring others to their knees.'
+      ),
       span: 'md:col-span-1',
-      icon: <Globe className='size-4 text-violet-400' />,
+      icon: <Gauge className='size-4 text-fuchsia-500' />,
       visual: (
-        <div className='mt-4 space-y-2'>
-          {[t('Load Balancing'), t('Rate Limiting'), t('Cost Tracking')].map(
-            (step, i) => (
-              <div key={step} className='flex items-center gap-2'>
-                <div
-                  className={`flex size-6 items-center justify-center rounded-full text-[10px] font-bold ${
-                    i === 1
-                      ? 'border border-blue-500/30 bg-blue-500/20 text-blue-500'
-                      : 'border-border/40 bg-muted text-muted-foreground border'
-                  }`}
-                >
-                  {i + 1}
-                </div>
-                <div className='bg-border/40 h-px flex-1' />
-                <span className='text-muted-foreground text-xs'>{step}</span>
-              </div>
-            )
-          )}
+        <div className='mt-4 flex h-16 items-end justify-between gap-1.5'>
+          {[36, 60, 44, 78, 52, 84, 92, 68, 96, 72].map((h, i) => (
+            <span
+              key={i}
+              className='ssa-bar w-full rounded-sm bg-gradient-to-t from-fuchsia-500/30 to-fuchsia-500/70'
+              style={{
+                height: `${h}%`,
+                animationDelay: `${i * 90}ms`,
+              }}
+            />
+          ))}
         </div>
       ),
     },
     {
-      id: 'developer',
+      id: 'agent',
       num: '04',
-      title: t('Developer Friendly'),
-      desc: t('Compatible API routes for common AI application workflows'),
+      title: t('Built for agents'),
+      desc: t(
+        'Streaming, function calls, tool use, MCP-ready endpoints and per-key budgets. Wire up your autonomous workflows in minutes.'
+      ),
       span: 'md:col-span-2',
-      icon: <Code className='size-4 text-amber-400' />,
+      icon: <Wand2 className='size-4 text-violet-500' />,
       visual: (
-        <div className='mt-4 flex items-center gap-3'>
-          <div className='flex -space-x-2'>
-            {['API', 'SDK', 'CLI', 'Docs'].map((n) => (
-              <div
-                key={n}
-                className='border-background from-muted to-muted/60 text-muted-foreground flex size-8 items-center justify-center rounded-full border-2 bg-gradient-to-br text-[9px] font-bold'
-              >
-                {n}
-              </div>
-            ))}
-          </div>
-          <div className='text-muted-foreground flex items-center gap-1.5 text-xs'>
-            <Code className='size-3.5 text-blue-500' />
-            {t('Multi-protocol Compatible')}
-          </div>
+        <div className='mt-4 flex flex-wrap items-center gap-1.5'>
+          {[
+            'streaming',
+            'function_call',
+            'tool_use',
+            'vision',
+            'mcp',
+            'embeddings',
+            'rerank',
+            'image_gen',
+          ].map((tag, i) => (
+            <span
+              key={tag}
+              className='ssa-tag border-border/40 bg-muted/40 text-foreground/70 inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 font-mono text-[10.5px]'
+              style={{ animationDelay: `${i * 70}ms` }}
+            >
+              <span aria-hidden className='ssa-pulse-dot bg-violet-500' />
+              {tag}
+            </span>
+          ))}
         </div>
       ),
     },
@@ -157,24 +164,32 @@ export function Features(_props: FeaturesProps) {
 
   const additionalFeatures = [
     {
-      icon: <Gauge className='size-5' strokeWidth={1.5} />,
-      title: t('High Performance'),
-      desc: t('Support for high concurrency with automatic load balancing'),
+      icon: <Layers className='size-5' strokeWidth={1.5} />,
+      title: t('Unified API surface'),
+      desc: t(
+        'One OpenAI-compatible base URL routes to 200+ models across providers.'
+      ),
     },
     {
-      icon: <DollarSign className='size-5' strokeWidth={1.5} />,
-      title: t('Transparent Billing'),
-      desc: t('Pay-as-you-go with real-time usage monitoring'),
+      icon: <Receipt className='size-5' strokeWidth={1.5} />,
+      title: t('Itemized billing'),
+      desc: t(
+        'Per-request token, cache and cost breakdown — no mystery line on your bill.'
+      ),
     },
     {
-      icon: <Users className='size-5' strokeWidth={1.5} />,
-      title: t('Team Collaboration'),
-      desc: t('Multi-user management with flexible permission allocation'),
+      icon: <ShieldCheck className='size-5' strokeWidth={1.5} />,
+      title: t('Keys you can trust'),
+      desc: t(
+        'Per-key quota, IP allowlist, rate limit and grouping for safe sharing.'
+      ),
     },
     {
       icon: <HeartHandshake className='size-5' strokeWidth={1.5} />,
-      title: t('Open Source'),
-      desc: t('Community driven, self-hosted, and extensible'),
+      title: t('Open source, self-hostable'),
+      desc: t(
+        'Take the recipe home — fork, audit, deploy under your own roof anytime.'
+      ),
     },
   ]
 
@@ -183,12 +198,14 @@ export function Features(_props: FeaturesProps) {
       <div className='mx-auto max-w-6xl'>
         <AnimateInView className='mb-16 max-w-lg'>
           <p className='text-muted-foreground mb-3 text-xs font-medium tracking-widest uppercase'>
-            {t('Core Features')}
+            {t('Why pick this stall')}
           </p>
           <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
-            {t('Built for developers,')}
+            {t('Same models,')}
             <br />
-            {t('designed for scale')}
+            <span className='bg-gradient-to-r from-amber-500 via-rose-500 to-fuchsia-500 bg-clip-text text-transparent'>
+              {t('street-stall prices.')}
+            </span>
           </h2>
         </AnimateInView>
 
@@ -206,6 +223,7 @@ export function Features(_props: FeaturesProps) {
                   {f.num}
                 </span>
                 <h3 className='text-sm font-semibold'>{f.title}</h3>
+                {f.icon}
               </div>
               <p className='text-muted-foreground text-sm leading-relaxed'>
                 {f.desc}

@@ -89,6 +89,7 @@ interface StatsProps {
 
 interface StatItem {
   end: number
+  prefix?: string
   suffix: string
   label: string
   decimals?: number
@@ -98,10 +99,19 @@ export function Stats(_props: StatsProps) {
   const { t } = useTranslation()
 
   const stats: StatItem[] = [
-    { end: 50, suffix: '+', label: t('upstream services integrated') },
-    { end: 100, suffix: '+', label: t('model billing support') },
-    { end: 50, suffix: '+', label: t('compatible API routes') },
-    { end: 10, suffix: '+', label: t('scheduling controls') },
+    { end: 30, suffix: '+', label: t('top-tier models on the menu') },
+    { end: 85, suffix: '%', label: t('avg. prompt cache hit rate') },
+    {
+      end: 100000,
+      suffix: '+',
+      label: t('concurrent requests per node'),
+    },
+    {
+      end: 99.9,
+      suffix: '%',
+      decimals: 2,
+      label: t('uptime SLA, no holiday off'),
+    },
   ]
 
   return (
@@ -111,10 +121,15 @@ export function Stats(_props: StatsProps) {
           {stats.map((s) => (
             <div
               key={s.label}
-              className='flex flex-col items-center text-center'
+              className='ssa-stat-card group relative flex flex-col items-center text-center'
             >
-              <span className='text-2xl font-bold tracking-tight md:text-3xl'>
-                <Counter end={s.end} suffix={s.suffix} decimals={s.decimals} />
+              <span className='bg-gradient-to-br from-amber-500 via-rose-500 to-fuchsia-500 bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl'>
+                <Counter
+                  end={s.end}
+                  prefix={s.prefix}
+                  suffix={s.suffix}
+                  decimals={s.decimals}
+                />
               </span>
               <span className='text-muted-foreground mt-1.5 text-xs'>
                 {s.label}

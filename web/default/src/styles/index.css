@@ -583,3 +583,297 @@ For commercial licensing, please contact support@quantumnous.com
     animation: none !important;
   }
 }
+
+/* ── StreetStallAI landing animations ── */
+
+/* Neon shimmer for brand badge */
+@keyframes ssa-shimmer-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+.ssa-shimmer {
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in oklch, oklch(0.85 0.18 60) 65%, transparent) 50%,
+    transparent 70%
+  );
+  animation: ssa-shimmer-sweep 3.6s ease-in-out infinite;
+}
+
+/* Brand-name soft glow + slow color drift */
+@keyframes ssa-brand-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 6px oklch(0.78 0.18 60 / 35%));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px oklch(0.74 0.22 330 / 40%));
+  }
+}
+.ssa-brand-glow {
+  animation: ssa-brand-glow 5.5s ease-in-out infinite;
+}
+
+/* Tagline pill entrance + faint hover lift */
+@keyframes ssa-pill-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ssa-pill {
+  animation: ssa-pill-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+.ssa-pill:hover {
+  transform: translateY(-1px);
+}
+
+/* Tiny pulsing status dot */
+@keyframes ssa-dot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0.9;
+  }
+  50% {
+    box-shadow: 0 0 0 4px transparent;
+    opacity: 1;
+  }
+}
+.ssa-pulse-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  animation: ssa-dot-pulse 1.6s ease-in-out infinite;
+}
+
+/* Floating glow orbs in the hero background */
+@keyframes ssa-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) scale(1.05);
+  }
+}
+.ssa-float-orb {
+  animation: ssa-float 9s ease-in-out infinite;
+}
+
+/* CTA button — diagonal shine sweep */
+@keyframes ssa-cta-shine {
+  0% {
+    transform: translateX(-150%) skewX(-12deg);
+  }
+  60%,
+  100% {
+    transform: translateX(150%) skewX(-12deg);
+  }
+}
+.ssa-cta-shine::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 30%,
+    color-mix(in oklch, white 55%, transparent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-150%) skewX(-12deg);
+  animation: ssa-cta-shine 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* CTA section — slow light sweep across the background */
+@keyframes ssa-cta-sweep {
+  0% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(20%);
+  }
+}
+.ssa-cta-sweep {
+  background: radial-gradient(
+    ellipse 30% 60% at 50% 50%,
+    color-mix(in oklch, oklch(0.78 0.18 60) 25%, transparent) 0%,
+    transparent 70%
+  );
+  animation: ssa-cta-sweep 8s ease-in-out infinite alternate;
+}
+
+/* Stats card hover lift */
+.ssa-stat-card {
+  transition: transform 220ms ease;
+}
+.ssa-stat-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Bento — price row staggered entrance */
+@keyframes ssa-price-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.ssa-price-row {
+  animation: ssa-price-row-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Bento — concurrent bars rising */
+@keyframes ssa-bar-rise {
+  from {
+    transform: scaleY(0.15);
+    opacity: 0.4;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+.ssa-bar {
+  transform-origin: bottom;
+  animation: ssa-bar-rise 1.6s cubic-bezier(0.16, 1, 0.3, 1) both,
+    ssa-bar-breathe 3.8s ease-in-out infinite;
+}
+@keyframes ssa-bar-breathe {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Bento — tag chips staggered fade */
+@keyframes ssa-tag-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ssa-tag {
+  animation: ssa-tag-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Bento — cache hit pulsing rings */
+@keyframes ssa-cache-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+.ssa-cache-ring {
+  animation: ssa-cache-ring 2.6s ease-out infinite;
+}
+
+/* How-it-works step badge pulse */
+@keyframes ssa-step-badge {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.74 0.22 330 / 50%);
+  }
+  50% {
+    box-shadow: 0 0 0 8px oklch(0.74 0.22 330 / 0%);
+  }
+}
+.ssa-step-badge {
+  animation: ssa-step-badge 2.4s ease-in-out infinite;
+}
+
+/* PricingDeal — conic background slow rotation behind the rate card */
+@keyframes ssa-rate-conic {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.ssa-rate-conic {
+  background: conic-gradient(
+    from 0deg,
+    oklch(0.78 0.18 60 / 30%),
+    oklch(0.74 0.22 330 / 30%),
+    oklch(0.70 0.16 250 / 30%),
+    oklch(0.78 0.18 60 / 30%)
+  );
+  filter: blur(40px);
+  animation: ssa-rate-conic 16s linear infinite;
+}
+
+/* PricingDeal — soft pulse for ¥1=$1 hero number */
+@keyframes ssa-rate-flash {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 6px oklch(0.78 0.18 60 / 35%));
+  }
+  50% {
+    filter: drop-shadow(0 0 18px oklch(0.74 0.22 330 / 45%));
+  }
+}
+.ssa-rate-flash {
+  animation: ssa-rate-flash 3.6s ease-in-out infinite;
+}
+
+/* Partner — drifting radial spotlight */
+@keyframes ssa-partner-glow {
+  0%,
+  100% {
+    background-position: 20% 30%, 80% 70%;
+  }
+  50% {
+    background-position: 30% 60%, 70% 40%;
+  }
+}
+.ssa-partner-glow {
+  background-image:
+    radial-gradient(ellipse 40% 35% at 20% 30%, oklch(0.78 0.18 60 / 55%) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 35% at 80% 70%, oklch(0.74 0.20 330 / 55%) 0%, transparent 70%);
+  background-repeat: no-repeat;
+  animation: ssa-partner-glow 14s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssa-shimmer,
+  .ssa-brand-glow,
+  .ssa-pill,
+  .ssa-pulse-dot,
+  .ssa-float-orb,
+  .ssa-cta-shine::before,
+  .ssa-cta-sweep,
+  .ssa-price-row,
+  .ssa-bar,
+  .ssa-tag,
+  .ssa-cache-ring,
+  .ssa-step-badge,
+  .ssa-rate-conic,
+  .ssa-rate-flash,
+  .ssa-partner-glow {
+    animation: none !important;
+  }
+}
