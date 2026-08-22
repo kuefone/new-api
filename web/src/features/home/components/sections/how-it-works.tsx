@@ -26,70 +26,61 @@ export function HowItWorks() {
 
   const steps = [
     {
-      num: '1',
+      num: '01',
       title: t('Order a key'),
       desc: t(
         'Sign up, top up a few coins, and grab your stall key — no contract, no minimum.'
       ),
-      icon: <KeyRound className='size-6' strokeWidth={1.5} />,
+      icon: <KeyRound className='size-5' strokeWidth={1.5} />,
     },
     {
-      num: '2',
+      num: '02',
       title: t('Swap the base URL'),
       desc: t(
         'Point your OpenAI / Claude / Gemini client at our endpoint. Same SDK, same calls.'
       ),
-      icon: <Plug className='size-6' strokeWidth={1.5} />,
+      icon: <Plug className='size-5' strokeWidth={1.5} />,
     },
     {
-      num: '3',
+      num: '03',
       title: t('Ship the agent'),
       desc: t(
         'Stream tokens, hit cache, watch the live usage board — the kitchen runs 24/7.'
       ),
-      icon: <Sparkles className='size-6' strokeWidth={1.5} />,
+      icon: <Sparkles className='size-5' strokeWidth={1.5} />,
     },
   ]
 
   return (
-    <section className='border-border/40 relative z-10 border-t px-6 py-24 md:py-32'>
+    <section className='border-border relative z-10 border-t px-6 py-24 md:py-32'>
       <div className='mx-auto max-w-6xl'>
-        <AnimateInView className='mb-16 text-center md:mb-20'>
-          <p className='text-muted-foreground mb-3 text-xs font-medium tracking-widest uppercase'>
+        <AnimateInView className='mb-16 max-w-xl'>
+          <p className='text-muted-foreground mb-3 text-[11px] font-medium tracking-[0.18em] uppercase'>
             {t('How it works')}
           </p>
-          <h2 className='text-2xl font-bold tracking-tight md:text-3xl'>
+          <h2 className='font-serif text-3xl leading-[1.1] font-medium tracking-tight md:text-5xl'>
             {t('Order, plug in, and you are live')}
           </h2>
         </AnimateInView>
 
-        <div className='ssa-steps relative grid gap-8 md:grid-cols-3 md:gap-12'>
-          {/* Decorative connector line between steps */}
-          <div
-            aria-hidden
-            className='absolute top-8 hidden h-px md:right-[16.6%] md:left-[16.6%] md:block'
-            style={{
-              background:
-                'linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent)',
-            }}
-          />
+        <div className='grid gap-px border md:grid-cols-3'>
           {steps.map((step, i) => (
             <AnimateInView
               key={step.num}
-              delay={i * 150}
+              delay={i * 80}
               animation='fade-up'
-              className='relative flex flex-col items-center text-center'
+              className='bg-background p-8'
             >
-              <div className='relative mb-6'>
-                <div className='text-muted-foreground border-border/50 bg-background group-hover:text-foreground flex size-16 items-center justify-center rounded-2xl border transition-colors'>
-                  {step.icon}
-                </div>
-                <div className='ssa-step-badge absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-fuchsia-500 text-xs font-bold text-white shadow-[0_0_18px_-2px_var(--tw-shadow-color)] shadow-fuchsia-500/40'>
+              <div className='text-muted-foreground mb-8 flex items-center justify-between'>
+                <span className='font-mono text-[11px] tracking-[0.16em]'>
                   {step.num}
-                </div>
+                </span>
+                {step.icon}
               </div>
-              <h3 className='mb-2 text-base font-semibold'>{step.title}</h3>
-              <p className='text-muted-foreground max-w-[240px] text-sm leading-relaxed'>
+              <h3 className='mb-3 text-lg font-semibold tracking-tight'>
+                {step.title}
+              </h3>
+              <p className='text-muted-foreground text-sm leading-6'>
                 {step.desc}
               </p>
             </AnimateInView>

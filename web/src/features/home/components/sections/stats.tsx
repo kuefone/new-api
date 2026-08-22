@@ -16,7 +16,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { useRef, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 interface CounterProps {
@@ -115,15 +115,15 @@ export function Stats(_props: StatsProps) {
   ]
 
   return (
-    <div className='border-border/40 bg-muted/10 relative z-10 border-y'>
-      <div className='mx-auto max-w-6xl px-6 py-10 md:py-12'>
-        <div className='grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12'>
-          {stats.map((s) => (
+    <div className='border-border relative z-10 border-y'>
+      <div className='mx-auto max-w-6xl px-6'>
+        <div className='grid grid-cols-2 md:grid-cols-4'>
+          {stats.map((s, i) => (
             <div
               key={s.label}
-              className='ssa-stat-card group relative flex flex-col items-center text-center'
+              className={`flex flex-col gap-2 py-8 md:px-6 ${i > 0 ? 'md:border-border md:border-l' : ''} ${i % 2 === 1 ? 'pl-6' : ''}`}
             >
-              <span className='bg-gradient-to-br from-amber-500 via-rose-500 to-fuchsia-500 bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl'>
+              <span className='font-serif text-3xl font-medium tracking-tight md:text-4xl'>
                 <Counter
                   end={s.end}
                   prefix={s.prefix}
@@ -131,7 +131,7 @@ export function Stats(_props: StatsProps) {
                   decimals={s.decimals}
                 />
               </span>
-              <span className='text-muted-foreground mt-1.5 text-xs'>
+              <span className='text-muted-foreground max-w-[12rem] text-xs leading-5'>
                 {s.label}
               </span>
             </div>

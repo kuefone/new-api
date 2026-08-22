@@ -18,7 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { CherryStudio } from '@lobehub/icons'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight, BookOpen, MoreHorizontal, Sparkles } from 'lucide-react'
+import { ArrowRight, BookOpen, MoreHorizontal } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
@@ -50,12 +50,12 @@ export function Hero(props: HeroProps) {
       return (
         <Button
           variant='outline'
-          className='group border-border/50 hover:border-border hover:bg-muted/50 inline-flex h-11 items-center gap-1.5 rounded-lg px-5 text-sm font-medium'
+          className='h-11 rounded-none px-5'
           render={
             <a href={docsUrl} target='_blank' rel='noopener noreferrer' />
           }
         >
-          <BookOpen className='text-muted-foreground/80 group-hover:text-foreground size-4 transition-colors duration-200' />
+          <BookOpen className='size-4' />
           <span>{t('Docs')}</span>
         </Button>
       )
@@ -64,10 +64,10 @@ export function Hero(props: HeroProps) {
     return (
       <Button
         variant='outline'
-        className='group border-border/50 hover:border-border hover:bg-muted/50 inline-flex h-11 items-center gap-1.5 rounded-lg px-5 text-sm font-medium'
+        className='h-11 rounded-none px-5'
         render={<Link to={docsUrl} />}
       >
-        <BookOpen className='text-muted-foreground/80 group-hover:text-foreground size-4 transition-colors duration-200' />
+        <BookOpen className='size-4' />
         <span>{t('Docs')}</span>
       </Button>
     )
@@ -75,52 +75,34 @@ export function Hero(props: HeroProps) {
 
   return (
     <section
-      className={`relative z-10 overflow-hidden px-6 pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28 ${props.className ?? ''}`}
+      className={`relative z-10 overflow-hidden px-6 pt-20 pb-16 md:pt-28 md:pb-24 ${props.className ?? ''}`}
     >
       <div
         aria-hidden
-        className='pointer-events-none absolute inset-0 -z-10 opacity-30 dark:opacity-[0.16]'
-        style={{
-          background: [
-            'radial-gradient(ellipse 55% 45% at 18% 22%, oklch(0.78 0.18 60 / 75%) 0%, transparent 70%)',
-            'radial-gradient(ellipse 50% 40% at 82% 18%, oklch(0.70 0.20 320 / 65%) 0%, transparent 70%)',
-            'radial-gradient(ellipse 45% 35% at 50% 78%, oklch(0.70 0.16 250 / 50%) 0%, transparent 70%)',
-          ].join(', '),
-        }}
-      />
-      <div
-        aria-hidden
-        className='absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_30%,black_20%,transparent_100%)] bg-[size:4rem_4rem] opacity-[0.08]'
+        className='ssa-ledger-grid pointer-events-none absolute inset-0 -z-10'
       />
 
-      <div className='mx-auto grid max-w-6xl grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-8'>
+      <div className='mx-auto grid max-w-6xl grid-cols-1 items-start gap-14 lg:grid-cols-12 lg:gap-10'>
         <div className='flex flex-col items-start text-left lg:col-span-6'>
           <div
-            className='landing-animate-fade-up mb-5 inline-flex items-center gap-2 opacity-0'
+            className='landing-animate-fade-up mb-6 opacity-0'
             style={{ animationDelay: '0ms' }}
           >
-            <span className='ssa-neon-badge relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-fuchsia-500/10 to-violet-500/10 px-4 py-1.5 text-[11px] font-medium tracking-wider text-amber-700 backdrop-blur-sm dark:border-amber-400/30 dark:text-amber-300'>
-              <Sparkles className='size-3' />
-              <span>StreetStallAI · SSA</span>
-              <span aria-hidden className='ssa-shimmer absolute inset-0' />
-            </span>
+            <span className='ssa-stamp'>StreetStallAI · SSA</span>
           </div>
 
           <h1
-            className='landing-animate-fade-up text-[clamp(2.25rem,4.5vw,3.25rem)] leading-[1.15] font-bold tracking-tight'
+            className='landing-animate-fade-up font-serif text-[clamp(2.75rem,6vw,4.5rem)] leading-[0.95] font-medium tracking-tight'
             style={{ animationDelay: '60ms' }}
           >
-            <span className='ssa-brand-glow inline-block bg-gradient-to-br from-amber-400 via-rose-400 to-fuchsia-500 bg-clip-text text-transparent'>
-              路边摊 AI
-            </span>
-            <br />
-            <span className='text-foreground/90'>
+            <span className='block'>路边摊 AI</span>
+            <span className='text-muted-foreground mt-3 block max-w-xl font-sans text-xl font-normal tracking-tight md:text-2xl'>
               {t('A no-compromise, bargain AI gateway')}
             </span>
           </h1>
 
           <p
-            className='landing-animate-fade-up text-muted-foreground/85 mt-5 max-w-xl text-base leading-relaxed opacity-0 md:text-[15px]'
+            className='landing-animate-fade-up text-muted-foreground mt-6 max-w-xl text-base leading-7 opacity-0'
             style={{ animationDelay: '120ms' }}
           >
             {t(
@@ -129,29 +111,24 @@ export function Hero(props: HeroProps) {
           </p>
 
           <div
-            className='landing-animate-fade-up mt-6 flex flex-wrap items-center gap-2 opacity-0'
+            className='landing-animate-fade-up mt-7 flex flex-wrap gap-2 opacity-0'
             style={{ animationDelay: '160ms' }}
           >
-            {TAGLINE_KEYS.map((key, i) => (
-              <span
-                key={key}
-                className='ssa-pill border-border/50 bg-muted/40 text-foreground/70 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] backdrop-blur-sm'
-                style={{ animationDelay: `${i * 120}ms` }}
-              >
-                <span aria-hidden className='ssa-pulse-dot bg-emerald-500' />
+            {TAGLINE_KEYS.map((key) => (
+              <span key={key} className='ssa-chip'>
                 {t(key)}
               </span>
             ))}
           </div>
 
           <div
-            className='landing-animate-fade-up mt-8 flex flex-wrap items-center gap-3 opacity-0'
+            className='landing-animate-fade-up mt-9 flex flex-wrap items-center gap-3 opacity-0'
             style={{ animationDelay: '220ms' }}
           >
             {props.isAuthenticated ? (
               <>
                 <Button
-                  className='group h-11 rounded-lg px-5 text-sm font-medium'
+                  className='group h-11 rounded-none px-5'
                   render={<Link to='/dashboard' />}
                 >
                   {t('Go to Dashboard')}
@@ -162,17 +139,15 @@ export function Hero(props: HeroProps) {
             ) : (
               <>
                 <Button
-                  className='ssa-cta-shine group relative h-11 overflow-hidden rounded-lg px-5 text-sm font-medium'
+                  className='group h-11 rounded-none px-5'
                   render={<Link to='/sign-up' />}
                 >
-                  <span className='relative z-10 inline-flex items-center'>
-                    {t('Grab a stall key')}
-                    <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
-                  </span>
+                  {t('Grab a stall key')}
+                  <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
                 </Button>
                 <Button
                   variant='outline'
-                  className='border-border/50 hover:border-border hover:bg-muted/50 h-11 rounded-lg px-5 text-sm font-medium'
+                  className='h-11 rounded-none px-5'
                   render={<Link to='/pricing' />}
                 >
                   {t('Check the menu')}
@@ -183,27 +158,27 @@ export function Hero(props: HeroProps) {
           </div>
 
           <div
-            className='landing-animate-fade-up mt-10 w-full max-w-xl opacity-0'
+            className='landing-animate-fade-up mt-12 w-full max-w-xl opacity-0'
             style={{ animationDelay: '280ms' }}
           >
             <div className='mb-4 flex flex-col gap-1'>
-              <span className='text-muted-foreground/50 text-[10px] font-bold tracking-[0.15em] uppercase'>
+              <span className='text-muted-foreground text-[11px] font-medium tracking-[0.18em] uppercase'>
                 {t('Supported Applications')}
               </span>
-              <p className='text-muted-foreground/60 text-xs leading-relaxed'>
+              <p className='text-muted-foreground/80 text-xs leading-relaxed'>
                 {t(
                   'Supports one-click configuration and perfectly adapts to NewAPI multi-protocol configuration.'
                 )}
               </p>
             </div>
-            <div className='flex flex-wrap items-center gap-3'>
+            <div className='flex flex-wrap items-center gap-2'>
               <a
                 href='https://cherry-ai.com'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group border-border/40 bg-muted/15 text-foreground/80 hover:border-border hover:bg-muted/30 hover:text-foreground flex items-center gap-3 rounded-full border px-5 py-2.5 text-sm font-medium shadow-[0_1px_2.5px_rgba(0,0,0,0.01)] backdrop-blur-xs transition-all duration-300 hover:scale-[1.02]'
+                className='border-border bg-background hover:bg-muted/50 flex items-center gap-2.5 border px-4 py-2 text-sm font-medium transition-colors'
               >
-                <CherryStudio.Color size={24} className='shrink-0' />
+                <CherryStudio.Color size={20} className='shrink-0' />
                 <span>Cherry Studio</span>
               </a>
 
@@ -211,12 +186,12 @@ export function Hero(props: HeroProps) {
                 href='https://ccswitch.io'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group border-border/40 bg-muted/15 text-foreground/80 hover:border-border hover:bg-muted/30 hover:text-foreground flex items-center gap-3 rounded-full border px-5 py-2.5 text-sm font-medium shadow-[0_1px_2.5px_rgba(0,0,0,0.01)] backdrop-blur-xs transition-all duration-300 hover:scale-[1.02]'
+                className='border-border bg-background hover:bg-muted/50 flex items-center gap-2.5 border px-4 py-2 text-sm font-medium transition-colors'
               >
                 <img
                   src='https://ccswitch.io/favicon.png'
                   alt='CC Switch'
-                  className='size-6 shrink-0 rounded-md object-contain'
+                  className='size-5 shrink-0 object-contain'
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
                     const fallback = e.currentTarget.nextSibling as HTMLElement
@@ -225,15 +200,15 @@ export function Hero(props: HeroProps) {
                 />
                 <span
                   style={{ display: 'none' }}
-                  className='size-6 shrink-0 items-center justify-center rounded-md bg-amber-500/10 text-[10px] font-bold text-amber-600 dark:bg-amber-400/10 dark:text-amber-400'
+                  className='bg-muted text-muted-foreground size-5 shrink-0 items-center justify-center text-[10px] font-bold'
                 >
                   CC
                 </span>
                 <span>CC Switch</span>
               </a>
 
-              <div className='group border-border/40 bg-muted/15 text-foreground/55 hover:border-border hover:bg-muted/30 hover:text-foreground flex cursor-default items-center gap-2.5 rounded-full border px-5 py-2.5 text-sm font-medium shadow-[0_1px_2.5px_rgba(0,0,0,0.01)] backdrop-blur-xs transition-all duration-300 hover:scale-[1.02]'>
-                <MoreHorizontal className='text-muted-foreground/60 group-hover:text-foreground size-6 shrink-0 transition-colors' />
+              <div className='border-border text-muted-foreground flex cursor-default items-center gap-2 border px-4 py-2 text-sm'>
+                <MoreHorizontal className='size-5 shrink-0' />
                 <span>{t('More Apps')}</span>
               </div>
             </div>
@@ -244,7 +219,7 @@ export function Hero(props: HeroProps) {
           className='landing-animate-fade-up flex w-full justify-center opacity-0 lg:col-span-6'
           style={{ animationDelay: '360ms' }}
         >
-          <HeroTerminalDemo className='mt-8 lg:mt-0' />
+          <HeroTerminalDemo className='mt-4 lg:mt-0' />
         </div>
       </div>
     </section>

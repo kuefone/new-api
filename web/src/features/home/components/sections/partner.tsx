@@ -34,21 +34,24 @@ export function Partner() {
 
   const perks = [
     {
-      icon: <ShieldCheck className='size-5' strokeWidth={1.5} />,
+      num: '01',
+      icon: <ShieldCheck className='size-4' strokeWidth={1.5} />,
       title: t('First-hand account pool'),
       desc: t(
         'We operate the keys directly upstream — no middle layer skimming quota or rate-limiting your traffic.'
       ),
     },
     {
-      icon: <Layers className='size-5' strokeWidth={1.5} />,
+      num: '02',
+      icon: <Layers className='size-4' strokeWidth={1.5} />,
       title: t('First-hand resources'),
       desc: t(
         'Bulk capacity, priority quotas and channel mirrors — wholesale pricing passed straight to you.'
       ),
     },
     {
-      icon: <Trophy className='size-5' strokeWidth={1.5} />,
+      num: '03',
+      icon: <Trophy className='size-4' strokeWidth={1.5} />,
       title: t('Win-win revenue share'),
       desc: t(
         'Transparent tiered rebates, billing exports, white-label flow — your customers, your brand, our backbone.'
@@ -57,46 +60,45 @@ export function Partner() {
   ]
 
   return (
-    <section className='border-border/40 relative z-10 overflow-hidden border-t px-6 py-24 md:py-32'>
-      {/* Background glow */}
-      <div
-        aria-hidden
-        className='ssa-partner-glow pointer-events-none absolute inset-0 -z-10 opacity-30 dark:opacity-[0.15]'
-      />
-
+    <section className='border-border relative z-10 border-t px-6 py-24 md:py-32'>
       <div className='mx-auto max-w-6xl'>
-        <AnimateInView className='mx-auto mb-14 max-w-2xl text-center'>
-          <div className='inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/[0.06] px-3 py-1 text-[11px] font-medium tracking-wider text-amber-700 dark:border-amber-400/30 dark:text-amber-300'>
-            <Handshake className='size-3' />
+        <AnimateInView className='mb-14 max-w-2xl'>
+          <div className='text-muted-foreground mb-4 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase'>
+            <Handshake className='size-3.5' />
             {t('Partner program')}
           </div>
-          <h2 className='mt-4 text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
+          <h2 className='font-serif text-3xl leading-[1.1] font-medium tracking-tight md:text-5xl'>
             {t('Downstream resellers welcome')}
-            <br />
-            <span className='bg-gradient-to-r from-amber-500 via-rose-500 to-fuchsia-500 bg-clip-text text-transparent'>
-              {t('let’s win together')}
+            <span className='text-muted-foreground'>
+              {' '}
+              — {t('let’s win together')}
             </span>
           </h2>
-          <p className='text-muted-foreground/85 mx-auto mt-4 max-w-xl text-sm leading-relaxed md:text-base'>
+          <p className='text-muted-foreground mt-5 max-w-xl text-sm leading-7 md:text-base'>
             {t(
               'First-hand account pool, first-hand upstream resources — if you have downstream traffic, we have the wholesale rate card. Drop us a line, paperwork is light.'
             )}
           </p>
         </AnimateInView>
 
-        <div className='border-border/40 bg-border/40 grid gap-px overflow-hidden rounded-xl border md:grid-cols-3'>
+        <div className='grid gap-px border md:grid-cols-3'>
           {perks.map((p, i) => (
             <AnimateInView
               key={p.title}
               animation='scale-in'
-              delay={i * 120}
-              className='bg-background group hover:bg-muted/20 flex flex-col gap-3 p-7 transition-colors duration-300 md:p-8'
+              delay={i * 80}
+              className='bg-background flex flex-col gap-4 p-8'
             >
-              <div className='text-muted-foreground border-border/50 bg-muted/30 group-hover:text-foreground flex size-11 items-center justify-center rounded-lg border transition-colors'>
+              <div className='text-muted-foreground flex items-center justify-between'>
+                <span className='font-mono text-[11px] tracking-[0.16em]'>
+                  {p.num}
+                </span>
                 {p.icon}
               </div>
-              <h3 className='text-sm font-semibold'>{p.title}</h3>
-              <p className='text-muted-foreground text-sm leading-relaxed'>
+              <h3 className='text-base font-semibold tracking-tight'>
+                {p.title}
+              </h3>
+              <p className='text-muted-foreground text-sm leading-6'>
                 {p.desc}
               </p>
             </AnimateInView>
@@ -105,20 +107,15 @@ export function Partner() {
 
         <AnimateInView
           animation='fade-up'
-          className='mt-10 flex items-center justify-center gap-3'
+          className='mt-10 flex flex-wrap items-center gap-3'
         >
-          <Button
-            className='ssa-cta-shine group relative overflow-hidden rounded-lg'
-            render={<Link to='/about' />}
-          >
-            <span className='relative z-10 inline-flex items-center'>
-              {t('Talk to us about partnership')}
-              <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
-            </span>
+          <Button className='group rounded-none' render={<Link to='/about' />}>
+            {t('Talk to us about partnership')}
+            <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
           </Button>
           <Button
             variant='outline'
-            className='border-border/50 hover:border-border hover:bg-muted/50 rounded-lg'
+            className='rounded-none'
             render={<Link to='/pricing' />}
           >
             {t('Wholesale rate card')}

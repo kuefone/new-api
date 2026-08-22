@@ -34,7 +34,6 @@ interface DiscountExplainerProps {
   usdExchangeRate: number
   groupRatio: Record<string, number>
   className?: string
-  /** Compact = toolbar-style button (shorter label, square corners matching toolbar). */
   compact?: boolean
 }
 
@@ -81,12 +80,7 @@ export function DiscountExplainer(props: DiscountExplainerProps) {
           <Button
             variant='outline'
             size='sm'
-            className={cn(
-              compact
-                ? 'h-8 gap-1.5 rounded-lg border-amber-500/40 bg-gradient-to-r from-amber-500/[0.06] to-fuchsia-500/[0.06] px-3 text-xs font-medium text-amber-700 hover:border-amber-500/60 hover:from-amber-500/12 hover:to-fuchsia-500/12 dark:text-amber-300'
-                : 'group h-8 rounded-full border-amber-500/40 bg-gradient-to-r from-amber-500/[0.08] via-rose-500/[0.06] to-fuchsia-500/[0.08] text-xs font-medium text-amber-700 shadow-sm hover:border-amber-500/60 hover:from-amber-500/15 hover:to-fuchsia-500/15 dark:text-amber-300',
-              className
-            )}
+            className={cn('h-8 gap-1.5 rounded-none px-3 text-xs', className)}
           >
             <Percent className='size-3.5' />
             {compact ? t('Discount info') : t('How the discount works')}
@@ -97,87 +91,71 @@ export function DiscountExplainer(props: DiscountExplainerProps) {
       <PopoverContent
         align='center'
         sideOffset={8}
-        className='w-[min(92vw,420px)] p-0'
+        className='w-[min(92vw,420px)] rounded-none p-0'
       >
-        <div className='border-border/60 border-b bg-gradient-to-r from-amber-500/[0.08] via-rose-500/[0.06] to-fuchsia-500/[0.08] px-4 py-3'>
+        <div className='border-border border-b px-4 py-3'>
           <div className='flex items-center gap-2'>
-            <Percent className='size-4 text-amber-600 dark:text-amber-400' />
+            <Percent className='size-4' />
             <h3 className='text-sm font-semibold'>
               {t('How the discount works')}
             </h3>
           </div>
-          <p className='text-muted-foreground mt-1 text-xs leading-relaxed'>
+          <p className='text-muted-foreground mt-1 text-xs leading-5'>
             {t(
               'The discount reflects the gap between our actual cost and the vendor’s official price (converted to CNY). Two independent steps multiply together.'
             )}
           </p>
         </div>
 
-        <div className='space-y-4 px-4 py-4 text-xs'>
-          {/* Step 1: FX */}
+        <div className='flex flex-col gap-4 px-4 py-4 text-xs'>
           <section>
             <div className='flex items-center gap-2'>
-              <span className='flex size-5 items-center justify-center rounded-full bg-amber-500/15 text-[10px] font-bold text-amber-600 dark:text-amber-400'>
+              <span className='text-muted-foreground font-mono text-[10px] tracking-[0.16em]'>
                 01
               </span>
-              <Globe2 className='size-3.5 text-amber-600 dark:text-amber-400' />
+              <Globe2 className='size-3.5' />
               <h4 className='text-[13px] font-semibold'>{t('FX discount')}</h4>
             </div>
-            <p className='text-muted-foreground mt-1.5 leading-relaxed'>
+            <p className='text-muted-foreground mt-1.5 leading-5'>
               {t('Platform bills 1:1 — $1 of quota = ¥1 of balance.')}
             </p>
-            <ul className='mt-2 space-y-1.5'>
-              <li className='flex items-start gap-2'>
-                <span aria-hidden className='text-muted-foreground mt-0.5'>
-                  ▸
-                </span>
-                <span className='text-foreground/85'>
-                  {t(
-                    'Overseas models priced in USD → you skip one FX leg. FX discount = 1 ÷ exchange-rate.'
-                  )}
-                </span>
+            <ul className='mt-2 flex flex-col gap-1.5'>
+              <li className='text-foreground/85'>
+                {t(
+                  'Overseas models priced in USD → you skip one FX leg. FX discount = 1 ÷ exchange-rate.'
+                )}
               </li>
-              <li className='flex items-start gap-2'>
-                <span aria-hidden className='text-muted-foreground mt-0.5'>
-                  ▸
-                </span>
-                <span className='text-foreground/85'>
-                  {t(
-                    'Domestic models priced in CNY → no FX leg to skip. FX discount = 1.'
-                  )}
-                </span>
+              <li className='text-foreground/85'>
+                {t(
+                  'Domestic models priced in CNY → no FX leg to skip. FX discount = 1.'
+                )}
               </li>
             </ul>
-            <div className='border-border/40 bg-muted/40 mt-2.5 flex items-center justify-between rounded-md border px-2.5 py-1.5 font-mono text-[11px] tabular-nums'>
+            <div className='border-border mt-2.5 flex items-center justify-between border px-2.5 py-1.5 font-mono text-[11px] tabular-nums'>
               <span className='text-muted-foreground'>{t('current rate')}</span>
-              <span className='text-foreground/90'>
-                1 USD = ¥{formatRatio(usdExchangeRate, 2)}
-              </span>
-              <span className='text-amber-600 dark:text-amber-400'>
-                → {formatRatio(fxDiscount)}
-              </span>
+              <span>1 USD = ¥{formatRatio(usdExchangeRate, 2)}</span>
+              <span>→ {formatRatio(fxDiscount)}</span>
             </div>
           </section>
 
-          {/* Step 2: Group ratio */}
           <section>
             <div className='flex items-center gap-2'>
-              <span className='flex size-5 items-center justify-center rounded-full bg-fuchsia-500/15 text-[10px] font-bold text-fuchsia-600 dark:text-fuchsia-400'>
+              <span className='text-muted-foreground font-mono text-[10px] tracking-[0.16em]'>
                 02
               </span>
-              <Layers className='size-3.5 text-fuchsia-600 dark:text-fuchsia-400' />
+              <Layers className='size-3.5' />
               <h4 className='text-[13px] font-semibold'>
                 {t('Group multiplier')}
               </h4>
             </div>
-            <p className='text-muted-foreground mt-1.5 leading-relaxed'>
+            <p className='text-muted-foreground mt-1.5 leading-5'>
               {t(
                 'Each token group carries a billing multiplier — the lower it is, the cheaper you pay. e.g. ratio 0.5 means 50% off.'
               )}
             </p>
             {sortedGroups.length > 0 && (
-              <div className='border-border/40 bg-muted/40 mt-2.5 max-h-32 overflow-y-auto rounded-md border'>
-                <div className='text-muted-foreground grid grid-cols-[1fr_auto_auto] gap-x-3 px-2.5 py-1.5 text-[10px] font-semibold tracking-wider uppercase'>
+              <div className='border-border mt-2.5 max-h-32 overflow-y-auto border'>
+                <div className='text-muted-foreground grid grid-cols-[1fr_auto_auto] gap-x-3 px-2.5 py-1.5 text-[10px] font-medium tracking-[0.14em] uppercase'>
                   <span>{t('group')}</span>
                   <span>{t('ratio')}</span>
                   <span>{t('discount')}</span>
@@ -185,13 +163,11 @@ export function DiscountExplainer(props: DiscountExplainerProps) {
                 {sortedGroups.map(([name, ratio]) => (
                   <div
                     key={name}
-                    className='border-border/40 grid grid-cols-[1fr_auto_auto] gap-x-3 border-t px-2.5 py-1 font-mono text-[11px] tabular-nums'
+                    className='border-border grid grid-cols-[1fr_auto_auto] gap-x-3 border-t px-2.5 py-1 font-mono text-[11px] tabular-nums'
                   >
-                    <span className='text-foreground/85 truncate'>{name}</span>
-                    <span className='text-foreground/90'>
-                      {formatRatio(ratio, 3)}
-                    </span>
-                    <span className='text-fuchsia-600 dark:text-fuchsia-400'>
+                    <span className='truncate'>{name}</span>
+                    <span>{formatRatio(ratio, 3)}</span>
+                    <span>
                       {ratioToOff(ratio)} {t('折')}
                     </span>
                   </div>
@@ -200,12 +176,11 @@ export function DiscountExplainer(props: DiscountExplainerProps) {
             )}
           </section>
 
-          {/* Combined */}
-          <section className='border-border/40 -mx-4 -mb-4 border-t bg-gradient-to-r from-amber-500/[0.06] via-rose-500/[0.05] to-fuchsia-500/[0.06] px-4 py-3'>
+          <section className='border-border -mx-4 -mb-4 border-t px-4 py-3'>
             <h4 className='text-[13px] font-semibold'>
               {t('Combined discount')}
             </h4>
-            <p className='text-muted-foreground mt-1.5 leading-relaxed'>
+            <p className='text-muted-foreground mt-1.5 leading-5'>
               {t('Final = FX discount × group multiplier')}
             </p>
             {sortedGroups.length > 0 && (
@@ -213,11 +188,11 @@ export function DiscountExplainer(props: DiscountExplainerProps) {
                 <span className='text-muted-foreground'>
                   {t('best case')}:&nbsp;
                 </span>
-                <span className='text-foreground/90'>
+                <span>
                   {formatRatio(fxDiscount)} × {formatRatio(bestGroupRatio, 3)}
                 </span>
                 <span className='text-muted-foreground'> = </span>
-                <span className='bg-gradient-to-r from-amber-500 via-rose-500 to-fuchsia-500 bg-clip-text font-semibold text-transparent'>
+                <span className='font-semibold'>
                   {formatRatio(finalDiscount, 4)} ({ratioToOff(finalDiscount)}{' '}
                   {t('折')})
                 </span>

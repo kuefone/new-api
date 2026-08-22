@@ -215,16 +215,15 @@ export function HeroTerminalDemo(props: HeroTerminalDemoProps) {
     <div className={cn('mx-auto w-full max-w-2xl', props.className)}>
       <div
         className={cn(
-          'overflow-hidden rounded-2xl border backdrop-blur-sm',
-          'border-border/60 bg-white/95 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.18)]',
-          'dark:border-white/[0.06] dark:bg-[#0b0f17]/95 dark:shadow-[0_20px_60px_-25px_rgba(0,0,0,0.7)]'
+          'overflow-hidden rounded-none border',
+          'border-border bg-background'
         )}
       >
         {/* Tab strip */}
         <div
           className={cn(
             'flex items-center gap-1 border-b px-2 sm:gap-1.5 sm:px-3',
-            'border-border/50 dark:border-white/[0.05]'
+            'border-border'
           )}
         >
           {API_DEMOS.map((item, index) => {
@@ -257,7 +256,7 @@ export function HeroTerminalDemo(props: HeroTerminalDemoProps) {
         <div
           className={cn(
             'flex items-center gap-2.5 border-b px-5 py-3',
-            'border-border/40 dark:border-white/[0.04]'
+            'border-border'
           )}
         >
           <span
@@ -291,7 +290,7 @@ export function HeroTerminalDemo(props: HeroTerminalDemoProps) {
         <div
           className={cn(
             'flex items-center justify-between border-t px-5 py-2.5',
-            'border-border/40 bg-muted/30 dark:border-white/[0.05] dark:bg-white/[0.02]'
+            'border-border bg-muted/30'
           )}
         >
           <div className='text-foreground/40 flex items-center gap-3 text-[10px] tabular-nums'>
@@ -371,10 +370,7 @@ function ResponseBlock(props: { demo: ApiDemoConfig; transitioning: boolean }) {
 
   return (
     <div
-      className={cn(
-        'relative border-t px-5 py-4',
-        'border-border/40 bg-muted/20 dark:border-white/[0.05] dark:bg-white/[0.015]'
-      )}
+      className={cn('relative border-t px-5 py-4', 'border-border bg-muted/20')}
     >
       <SectionLabel>Response</SectionLabel>
       <div

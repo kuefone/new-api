@@ -130,13 +130,15 @@ export function Home() {
 
   return (
     <PublicLayout showMainContainer={false}>
-      <Hero isAuthenticated={isAuthenticated} />
-      <Stats />
-      <Features />
-      <PricingDeal isAuthenticated={isAuthenticated} />
-      <HowItWorks />
-      <Partner />
-      <CTA isAuthenticated={isAuthenticated} />
+      <div className='ssa-ledger'>
+        <Hero isAuthenticated={isAuthenticated} />
+        <Stats />
+        <Features />
+        <PricingDeal isAuthenticated={isAuthenticated} />
+        <HowItWorks />
+        <Partner />
+        <CTA isAuthenticated={isAuthenticated} />
+      </div>
       <Footer />
     </PublicLayout>
   )
